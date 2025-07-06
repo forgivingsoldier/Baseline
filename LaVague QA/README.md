@@ -1,24 +1,24 @@
-This baseline is from this url:     [Quick tour - LaVague](https://docs.lavague.ai/en/latest/docs/lavague-qa/quick-tour/)
+This baseline is adapted from the official LaVague guide: [Quick tour - LaVague](https://www.google.com/search?q=https://lavague.ai/docs/qa).
 
-# LaVague QA 使用示例
+# LaVague QA Usage Example
 
-本文档将介绍 **`LaVague QA`**，我们将其作为一个标准的**基线模型 (Baseline Model)** 。
+This document introduces LaVague QA, which serves as a standard baseline model for our tests.
 
-通过以下示例，我们将展示该模型如何将Gherkin功能描述文件（`.feature`）转换为可执行的Pytest测试代码，并了解其基本配置与用法。
+The following example demonstrates how the model converts a Gherkin feature file (`.feature`) into executable Pytest code and covers its basic configuration and usage.
 
-本文档中的所有命令都假定您在项目的根目录下运行。
+All commands in this document assume they are run from the root directory of the project.
 
-## 1. 环境配置 (重要)
+## 1. Environment Setup (Important)
 
-在运行任何示例之前，您必须先配置您的 OpenAI API 密钥。`LaVague` 使用大语言模型来理解您的指令并生成代码，因此需要这个密钥来进行身份验证。
+You must configure your OpenAI API key before running any examples. LaVague utilizes a Large Language Model (LLM) to understand instructions and generate code, which requires this key for authentication.
 
-#### 获取你的 API 密钥
+#### Get Your API Key
 
-首先，从 OpenAI 官方网站获取您的 API 密钥：[platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys)
+First, obtain your API key from the official OpenAI website: [platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys)
 
-#### 设置环境变量
+#### Set the Environment Variable
 
-接下来，在您的终端中设置环境变量。请将 `sk-...` 替换为您自己的真实密钥。
+Next, set the environment variable in your terminal. Please replace `sk-...` with your actual key.
 
 - **Windows (PowerShell):**
 
@@ -38,17 +38,17 @@ This baseline is from this url:     [Quick tour - LaVague](https://docs.lavague.
   export OPENAI_API_KEY="sk-..."
   ```
 
-**注意**：此设置为临时有效，仅在当前终端窗口中生效。关闭窗口后需要重新设置。
+**Note:** This setting is temporary and only applies to the current terminal session. You will need to set it again if you open a new terminal window.
 
-## 2. 测试示例
+## 2. Example Test Case
 
-下面提供一组**`LaVague QA`**测试示例作为参考，这个样例在流程上可以跑通，但它生成的测试代码存在问题，这也是我们拿它作为测试示例的原因。
+The following LaVague QA test case is provided as a baseline. While the process is end-to-end runnable, the test code it generates is known to be flawed. This makes it a suitable example for demonstrating the baseline's capabilities and limitations
 
-### Sauce Labs - 测试购物车功能
+### Sauce Labs - Testing Shopping Cart Functionality
 
-- **目的**：测试添加商品到购物车功能是否符合预期。
+- **目的**：To test if the add-to-cart functionality works as expected.
 
-#### Feature 文件 (`test.feature`)
+#### Feature File (`test.feature`)
 
 ```gherkin
 Feature: Add items to the shopping cart
@@ -64,13 +64,13 @@ Feature: Add items to the shopping cart
     Then the product count on the shopping cart icon should increase
 ```
 
-#### 生成 Pytest 代码
+#### Generate Pytest Code
 
 ```bash
  lavague-qa --url https://www.saucedemo.com/v1/inventory.html  --feature ./test.feature
 ```
 
-#### 使用pytest运行测试代码
+#### Run the Test Code with Pytest
 
 ```bash
  pytest .\generated_tests\test.py 
